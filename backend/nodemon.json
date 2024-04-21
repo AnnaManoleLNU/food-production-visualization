@@ -1,0 +1,4 @@
+{
+  "ext": "js,json",
+  "ignore": ["world_food_production.json"]
+}
