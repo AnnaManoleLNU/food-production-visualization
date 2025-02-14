@@ -1,4 +1,3 @@
-"use client"
 import BarChart from "./BarChart"
 import Dropdown from "./Dropdown"
 import Pie from "./Pie"
