@@ -178,8 +178,8 @@ export default function Pie({ selectedCountry }: GraphProps) {
     <div className="flex flex-col justify-center items-center text-center">
       {isVisible && (
         <div>
-          <p className="text-3xl font-bold text-green-600">Data at a glace</p>
-          <p className="text-sm">
+          <h2 className="text-3xl font-bold text-blue-900">Data at a glace for {selectedCountry}</h2>
+          <p className="text-sm font-medium leading-none mb-6  text-muted-foreground">
             Click on "Other" to see more. Click on any food to
             go back to the start.
           </p>

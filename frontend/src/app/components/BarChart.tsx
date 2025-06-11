@@ -63,8 +63,8 @@ export default function FoodBarChart({
       {isVisible && (
         <>
           <div>
-            <p className="text-3xl font-bold text-blue-900">Data summary</p>
-            <p className="text-sm">
+            <h2 className="text-3xl font-bold text-blue-900">Data summary for {selectedCountry}</h2>
+            <p className="text-sm font-medium leading-none mb-6  text-muted-foreground">
               Click on any bar to display more information in relation to global
               production.
             </p>

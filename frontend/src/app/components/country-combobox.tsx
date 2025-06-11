@@ -25,16 +25,19 @@ type Country = {
 };
 
 type DropdownProps = {
+  selectedCountry: string | null;
   onSelectedCountry: (country: string) => void;
   selectedFood: (food: string, quantity: number) => void;
 };
 
 export function CountryCombobox({
+  selectedCountry,
   onSelectedCountry,
   selectedFood,
 }: DropdownProps) {
   const [open, setOpen] = React.useState<boolean>(false);
-  const [value, setValue] = React.useState<string>("");
+  
+  const value = selectedCountry || "";
   const [countries, setCountries] = React.useState<Country[]>([]);
   const [searchTerm, setSearchTerm] = React.useState<string>("");
 
@@ -56,20 +59,18 @@ export function CountryCombobox({
 
   const handleSelect = (currentValue: string) => {
     const newValue = currentValue === value ? "" : currentValue;
-    setValue(newValue);
-    setOpen(false);
     onSelectedCountry(newValue);
+    setOpen(false);
     if (newValue === "") {
       selectedFood("", 0);
     }
   };
 
-  const handleClear = () => {
-    setValue("");
-    setSearchTerm("");
-    onSelectedCountry("");
-    selectedFood("", 0);
-  };
+  // const handleClear = () => {
+  //   setSearchTerm("");
+  //   onSelectedCountry("");
+  //   selectedFood("", 0);
+  // };
 
   const filteredCountries = countries.filter((country) =>
     country.key.toLowerCase().includes(searchTerm.toLowerCase())
@@ -121,7 +122,7 @@ export function CountryCombobox({
               </CommandGroup>
             </CommandList>
       
-        <Button
+        {/* <Button
           variant="secondary"
           size="sm"
           aria-label="Clear selection"
@@ -129,7 +130,7 @@ export function CountryCombobox({
           className="ml-auto my-2"
         >
           Clear
-        </Button>
+        </Button> */}
      
           </Command>
         </PopoverContent>
