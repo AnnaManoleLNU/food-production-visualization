@@ -45,7 +45,9 @@ export default function PiePopup({ selectedFood, selectedCountry }: FoodProps) {
     if (selectedFood?.name && selectedFood?.quantity) {
       setIsVisible(true);
       const fetchData = async () => {
-        const response = await fetch("https://food-production-visualisation-api.vercel.app/elastic/");
+        const response = await fetch(
+          "https://food-production-visualisation-api.vercel.app/elastic/"
+        );
         if (!response.ok) {
           console.error("Failed to fetch:", response.statusText);
           return;
@@ -101,7 +103,7 @@ export default function PiePopup({ selectedFood, selectedCountry }: FoodProps) {
       .value((d: any) => d)
       .sort(null);
     const arcGenerator = d3.arc().innerRadius(0).outerRadius(radius);
-    const color = d3.scaleOrdinal(["#4575b4", "#313695"]);
+    const color = d3.scaleOrdinal(["#004c99", "#003366"]);
 
     const update = svg.selectAll("path").data(pie(data));
 
@@ -109,7 +111,7 @@ export default function PiePopup({ selectedFood, selectedCountry }: FoodProps) {
       .enter()
       .append("path")
       .attr("d", arcGenerator)
-      .attr("fill", (d: any, i:number) => color(i))
+      .attr("fill", (d: any, i: number) => color(i))
       .attr("stroke", "white")
       .style("stroke-width", "2px")
       .on("mouseover", function (event: any, d: any) {
@@ -156,9 +158,11 @@ export default function PiePopup({ selectedFood, selectedCountry }: FoodProps) {
             (d.data / (globalFoodData + selectedFood?.quantity!)) *
             100
           ).toFixed(2)}%`;
-        }
-        else {
-          return `Global production ${((d.data / (globalFoodData + selectedFood?.quantity!)) * 100).toFixed(2)}%`;
+        } else {
+          return `Global production ${(
+            (d.data / (globalFoodData + selectedFood?.quantity!)) *
+            100
+          ).toFixed(2)}%`;
         }
       })
       .style("fill", "white");

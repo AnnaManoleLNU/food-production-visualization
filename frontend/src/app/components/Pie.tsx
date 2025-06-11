@@ -66,7 +66,7 @@ export default function Pie({ selectedCountry }: GraphProps) {
 
   const drawPieChart = (data: Country[], initial = false) => {
     const totalQuantity = d3.sum(data, (d: Country) => d.foodQuantityInTons);
-    const threshold = totalQuantity * 0.05; 
+    const threshold = totalQuantity * 0.05;
     let dataToDisplay = data.filter((d) => d.foodQuantityInTons > threshold);
     const otherQuantity =
       totalQuantity -
@@ -97,10 +97,10 @@ export default function Pie({ selectedCountry }: GraphProps) {
     const pie = d3.pie().value((d: Country) => d.foodQuantityInTons);
     const arcGenerator = d3.arc().innerRadius(0).outerRadius(radius);
     const color = d3.scaleOrdinal([
-      "#abd9e9",
-      "#74add1",
-      "#4575b4",
-      "#313695", 
+      "#338fd5",
+      "#0066cc", // Mid blue
+      "#004c99",
+      "#003366", // Darkest blue
     ]);
     const otherColor = "#18B05A";
 
@@ -168,6 +168,7 @@ export default function Pie({ selectedCountry }: GraphProps) {
       .attr("transform", (d: any) => `translate(${arcGenerator.centroid(d)})`)
       .attr("dy", "0.35em")
       .style("text-anchor", "middle")
+      .style("font-size", "12px")
       .text((d: any) => d.data.foodName)
       .style("fill", "white");
 
@@ -178,10 +179,12 @@ export default function Pie({ selectedCountry }: GraphProps) {
     <div className="flex flex-col justify-center items-center text-center">
       {isVisible && (
         <div>
-          <h2 className="text-3xl font-bold text-blue-900">Data at a glace for {selectedCountry}</h2>
+          <h2 className="text-3xl font-bold text-blue-900">
+            Data at a glace for {selectedCountry}
+          </h2>
           <p className="text-sm font-medium leading-none mb-6  text-muted-foreground">
-            Click on "Other" to see more. Click on any food to
-            go back to the start.
+            Click on "Other" to see more. Click on any food to go back to the
+            start.
           </p>
         </div>
       )}
