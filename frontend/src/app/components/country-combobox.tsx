@@ -88,7 +88,7 @@ export function CountryCombobox({
             className="w-[300px] justify-between"
           >
             <span className="truncate">
-            {value || "Choose a country"}
+            {value}
             </span>
             <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
