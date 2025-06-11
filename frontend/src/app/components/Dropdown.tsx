@@ -1,74 +1,78 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react";
 
 type Country = {
-  key: string
-  doc_count: number
-}
+  key: string;
+  doc_count: number;
+};
 
 type DropdownProps = {
-  onSelectedCountry: (country: string) => void
-  selectedFood: (food: string, quantity: number) => void
-}
+  onSelectedCountry: (country: string) => void;
+  selectedFood: (food: string, quantity: number) => void;
+};
 
-export default function Dropdown({ selectedFood, onSelectedCountry} : DropdownProps) {
-  const [isOpen, setIsOpen] = useState(false)
-  const [countries, setCountries] = useState<Country[]>([])
-  const [inputValue, setInputValue] = useState("")
-  const dropdownComponent = useRef(null)
-
+export default function Dropdown({
+  selectedFood,
+  onSelectedCountry,
+}: DropdownProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [countries, setCountries] = useState<Country[]>([]);
+  const [inputValue, setInputValue] = useState("");
+  const dropdownComponent = useRef(null);
 
   const useOutsideClick = (ref: any) => {
     useEffect(() => {
       function handleClickOutside(event: any) {
         if (ref.current && !ref.current.contains(event.target)) {
-          setIsOpen(false)
+          setIsOpen(false);
         }
       }
-      document.addEventListener("mousedown", handleClickOutside)
-      return() => {
-        document.removeEventListener("mousedown", handleClickOutside)
-      }
-    }, [ref])
-  }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  };
 
-  useOutsideClick(dropdownComponent)
+  useOutsideClick(dropdownComponent);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://food-production-visualisation-api.vercel.app/elastic/countries")
+        const response = await fetch(
+          "https://food-production-visualisation-api.vercel.app/elastic/countries"
+        );
         if (!response.ok) {
-          throw new Error(`Failed to fetch: ${response.statusText}`)
+          throw new Error(`Failed to fetch: ${response.statusText}`);
         }
 
-        const jsonData = await response.json()
-        setCountries(jsonData.countries)
+        const jsonData = await response.json();
+        setCountries(jsonData.countries);
       } catch (error) {
-        console.error("Error fetching data:", error)
+        console.error("Error fetching data:", error);
       }
-    }
+    };
 
-    fetchData()
-  }, []) // Empty array = runs only once after the initial render
+    fetchData();
+  }, []);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value)
-    setIsOpen(true)
-  }
+    setInputValue(event.target.value);
+    setIsOpen(true);
+  };
 
   const handleClearInput = () => {
-    setInputValue("")
-    setIsOpen(false)
-    onSelectedCountry("") // Notify the parent component that no country is selected
-    selectedFood("", 0) // Notify the parent component that no food is selected
-  }
+    setInputValue("");
+    setIsOpen(false);
+    onSelectedCountry(""); // Notify the parent component that no country is selected
+    selectedFood("", 0); // Notify the parent component that no food is selected
+  };
 
-  const filteredCountries = countries.filter(country =>
+  const filteredCountries = countries.filter((country) =>
     country.key.toLowerCase().includes(inputValue.toLowerCase())
-  )
+  );
 
   return (
-    <div className="flex justify-center items-center mb-20" >
+    <div className="flex justify-center items-center mb-20">
       <div className="relative" ref={dropdownComponent}>
         <input
           type="text"
@@ -77,7 +81,7 @@ export default function Dropdown({ selectedFood, onSelectedCountry} : DropdownPr
           onClick={() => setIsOpen(true)}
           placeholder="Choose a country"
           className="text-center border border-blue-900 py-2 px-4 rounded hover:border-blue-300 focus:outline-none"
-          />
+        />
         {inputValue && (
           <button
             onClick={handleClearInput}
@@ -93,9 +97,9 @@ export default function Dropdown({ selectedFood, onSelectedCountry} : DropdownPr
                 key={index}
                 className="p-2 hover:bg-gray-100 cursor-pointer"
                 onClick={() => {
-                  onSelectedCountry(country.key)
-                  setInputValue(country.key)
-                  setIsOpen(false)
+                  onSelectedCountry(country.key);
+                  setInputValue(country.key);
+                  setIsOpen(false);
                 }}
               >
                 {country.key}
@@ -105,5 +109,5 @@ export default function Dropdown({ selectedFood, onSelectedCountry} : DropdownPr
         )}
       </div>
     </div>
-  )
+  );
 }

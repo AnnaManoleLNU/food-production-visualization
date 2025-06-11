@@ -8,7 +8,7 @@ export default function Home() {
     <main  className="flex flex-col justify-center items-center">
       <Title>Global Food Production 2018</Title>
       <Visualizer />
-      {/* <Overview /> */}
+      
     </main>
   );
 }

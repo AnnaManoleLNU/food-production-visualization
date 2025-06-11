@@ -1,5 +1,6 @@
 import BarChart from "./BarChart"
 import Dropdown from "./Dropdown"
+import { CountryCombobox } from "./country-combobox"
 import Pie from "./Pie"
 import PiePopup from "./PiePopup"
 import { useState } from "react"
@@ -17,9 +18,8 @@ export default function Visualizer() {
   }
 
   return (
-    // React fragment.
     <> 
-      <Dropdown
+      <CountryCombobox
         onSelectedCountry={handleSelectCountry}
         selectedFood={handleSelectFood}
        />
