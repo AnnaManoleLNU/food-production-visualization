@@ -1,5 +1,4 @@
 import BarChart from "./BarChart"
-import Dropdown from "./Dropdown"
 import { CountryCombobox } from "./country-combobox"
 import Pie from "./Pie"
 import PiePopup from "./PiePopup"
