@@ -58,8 +58,9 @@ export function CountryCombobox({
   }, []);
 
   const handleSelect = (currentValue: string) => {
-    const newValue = currentValue === value ? "" : currentValue;
+    const newValue = currentValue === value ? value : currentValue;
     onSelectedCountry(newValue);
+    setSearchTerm("");
     setOpen(false);
     if (newValue === "") {
       selectedFood("", 0);

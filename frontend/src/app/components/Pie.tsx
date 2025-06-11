@@ -176,7 +176,7 @@ export default function Pie({ selectedCountry }: GraphProps) {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center text-center">
+    <div className="flex flex-col justify-center items-center text-center -mt-8">
       {isVisible && (
         <div>
           <h2 className="text-3xl font-bold text-blue-900">
@@ -189,7 +189,7 @@ export default function Pie({ selectedCountry }: GraphProps) {
         </div>
       )}
 
-      {isVisible && <div ref={pieContainer}></div>}
+      {isVisible && <div className="-mt-8" ref={pieContainer}></div>}
     </div>
   );
 }
