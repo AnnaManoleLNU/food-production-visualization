@@ -12,7 +12,6 @@ type Country = {
 };
 
 export default function Pie({ selectedCountry }: GraphProps) {
-  const [isVisible, setIsVisible] = useState<boolean>(false);
   const [countryData, setCountryData] = useState<Country[]>([]);
   const pieContainer = useRef(null);
 
@@ -40,7 +39,6 @@ export default function Pie({ selectedCountry }: GraphProps) {
 
   useEffect(() => {
     if (selectedCountry) {
-      setIsVisible(true);
       const fetchData = async () => {
         const response = await fetch(
           `https://food-production-visualisation-api.vercel.app/elastic/countries/${selectedCountry}`
@@ -53,16 +51,14 @@ export default function Pie({ selectedCountry }: GraphProps) {
         setCountryData(jsonData.documents);
       };
       fetchData();
-    } else {
-      setIsVisible(false);
-    }
+    } 
   }, [selectedCountry]);
 
   useEffect(() => {
-    if (isVisible && countryData.length > 0) {
+    if (countryData.length > 0) {
       drawPieChart(countryData, true);
     }
-  }, [isVisible, countryData]);
+  }, [countryData]);
 
   const drawPieChart = (data: Country[], initial = false) => {
     const totalQuantity = d3.sum(data, (d: Country) => d.foodQuantityInTons);
@@ -177,7 +173,7 @@ export default function Pie({ selectedCountry }: GraphProps) {
 
   return (
     <div className="flex flex-col justify-center items-center text-center -mt-8">
-      {isVisible && (
+      
         <div>
           <h2 className="text-3xl font-bold text-blue-900">
             Data at a glace for {selectedCountry}
@@ -187,9 +183,8 @@ export default function Pie({ selectedCountry }: GraphProps) {
             start.
           </p>
         </div>
-      )}
 
-      {isVisible && <div className="-mt-8" ref={pieContainer}></div>}
+      <div className="-mt-8" ref={pieContainer}></div>
     </div>
   );
 }

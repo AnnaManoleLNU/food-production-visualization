@@ -179,7 +179,7 @@ export default function PiePopup({ selectedFood, selectedCountry }: FoodProps) {
         </button>
         <h2 className="text-xl font-semibold text-blue-900">
           Percentage of {selectedFood?.name}, {selectedCountry} in relation to
-          global production
+          global production of {selectedFood?.name}
         </h2>
         <div ref={pieContainer2}></div>
       </div>
