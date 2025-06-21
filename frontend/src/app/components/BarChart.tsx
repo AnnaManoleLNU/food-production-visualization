@@ -12,7 +12,7 @@ import {
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 
 type GraphProps = {
-  selectedCountry: string | null;
+  selectedCountry: string;
   onSelectedFood: (food: string, quantity: number) => void;
 };
 

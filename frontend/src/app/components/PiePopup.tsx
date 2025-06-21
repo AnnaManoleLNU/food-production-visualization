@@ -13,11 +13,9 @@ type Food = {
 };
 
 export default function PiePopup({ selectedFood, selectedCountry }: FoodProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const [globalFoodData, setGlobalFoodData] = useState(0);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [globalFoodData, setGlobalFoodData] = useState<number>(0);
   const pieContainer2 = useRef(null);
-
-  const handleClose = () => setIsVisible(false);
 
   useEffect(() => {
     if (d3.select("body").selectAll(".tooltipPiePopup").empty()) {
@@ -73,7 +71,7 @@ export default function PiePopup({ selectedFood, selectedCountry }: FoodProps) {
       };
       fetchData();
     } else {
-      handleClose();
+      setIsVisible(false);
     }
   }, [selectedFood, selectedCountry]);
 
@@ -174,7 +172,7 @@ export default function PiePopup({ selectedFood, selectedCountry }: FoodProps) {
     <div className="fixed inset-0 bg-gray-700 bg-opacity-50 flex justify-center items-center">
       <div className="bg-white rounded-lg shadow-lg p-12 relative flex justify-center items-center flex-col">
         <button
-          onClick={handleClose}
+          onClick={() => setIsVisible(false)}
           className="absolute top-2 right-2 text-blue-900 text-xl"
         >
           ✖

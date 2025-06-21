@@ -5,7 +5,7 @@ import PiePopup from "./PiePopup";
 import { useState } from "react";
 
 export default function Visualizer() {
-  const [selectedCountry, setSelectedCountry] = useState<string | null>("Sweden");
+  const [selectedCountry, setSelectedCountry] = useState<string>("Sweden");
   const [selectedFood, setSelectedFood] = useState<{
     name: string | null;
     quantity: number | null;
@@ -13,7 +13,7 @@ export default function Visualizer() {
 
   const handleSelectCountry = (country: string) => {
     setSelectedCountry(country);
-    setSelectedFood({ name: null, quantity: null }); // Reset selection when country changes
+    setSelectedFood({ name: null, quantity: null });
   };
 
   const handleSelectFood = (food: string, quantity: number) => {

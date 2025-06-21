@@ -25,7 +25,7 @@ type Country = {
 };
 
 type DropdownProps = {
-  selectedCountry: string | null;
+  selectedCountry: string;
   onSelectedCountry: (country: string) => void;
   selectedFood: (food: string, quantity: number) => void;
 };
@@ -36,7 +36,7 @@ export function CountryCombobox({
   selectedFood,
 }: DropdownProps) {
   const [open, setOpen] = React.useState<boolean>(false);
-  
+
   const value = selectedCountry || "";
   const [countries, setCountries] = React.useState<Country[]>([]);
   const [searchTerm, setSearchTerm] = React.useState<string>("");
@@ -62,16 +62,7 @@ export function CountryCombobox({
     onSelectedCountry(newValue);
     setSearchTerm("");
     setOpen(false);
-    if (newValue === "") {
-      selectedFood("", 0);
-    }
   };
-
-  // const handleClear = () => {
-  //   setSearchTerm("");
-  //   onSelectedCountry("");
-  //   selectedFood("", 0);
-  // };
 
   const filteredCountries = countries.filter((country) =>
     country.key.toLowerCase().includes(searchTerm.toLowerCase())
@@ -87,9 +78,7 @@ export function CountryCombobox({
             aria-expanded={open}
             className="w-[300px] justify-between"
           >
-            <span className="truncate">
-            {value}
-            </span>
+            <span className="truncate">{value}</span>
             <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -122,17 +111,6 @@ export function CountryCombobox({
                 ))}
               </CommandGroup>
             </CommandList>
-      
-        {/* <Button
-          variant="secondary"
-          size="sm"
-          aria-label="Clear selection"
-          onClick={handleClear}
-          className="ml-auto my-2"
-        >
-          Clear
-        </Button> */}
-     
           </Command>
         </PopoverContent>
       </Popover>

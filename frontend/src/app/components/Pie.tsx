@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import * as d3 from "d3";
 
 type GraphProps = {
-  selectedCountry: string | null;
+  selectedCountry: string;
 };
 
 type Country = {
@@ -12,7 +12,7 @@ type Country = {
 };
 
 export default function Pie({ selectedCountry }: GraphProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
   const [countryData, setCountryData] = useState<Country[]>([]);
   const pieContainer = useRef(null);
 
